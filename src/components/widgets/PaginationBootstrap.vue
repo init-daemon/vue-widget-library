@@ -1,42 +1,37 @@
 <template>
-	<nav>
+	<nav v-if="page > 1">
 		<ul class="pagination">
-			<li class="page-item" :class="{ disabled: page == 1 }">
-				<a class="page-link" href="#" @click.prevent="changePage(1)">1</a>
+			<li class="page-item" v-if="page != 1">
+							<a class="page-link" href="#" @click.prevent="changePage(1)">1</a>
 			</li>
 			<li class="page-item" :class="{ disabled: page <= 1 }">
-				<a class="page-link" href="#" @click.prevent="previousPage">Précédent</a>
+							<a class="page-link" href="#" @click.prevent="previousPage">Précédent</a>
 			</li>
 			<li class="page-item" v-if="page > 10">
-				<a class="page-link" href="#" @click.prevent="changePage(page - 10)">&lt;&lt;</a>
+							<a class="page-link" href="#" @click.prevent="changePage(page - 10)">&lt;&lt;</a>
 			</li>
 			<li class="page-item active " v-if="page != 1 && page != totalPages">
-				<a class="page-link" href="#" @click.prevent="">{{ page }}</a>
+							<a class="page-link" href="#" @click.prevent="">{{ page }}</a>
 			</li>
 			<li class="page-item" v-if="page < totalPages - 10">
-				<a class="page-link" href="#" @click.prevent="changePage(page + 10)">&gt;&gt;</a>
-			</li>
+							<a class="page-link" href="#" @click.prevent="changePage(page + 10)">&gt;&gt;</a>
+							</li>
 			<li class="page-item" :class="{ disabled: page >= totalPages }">
-				<a class="page-link" href="#" @click.prevent="nextPage">Suivant</a>
-			</li>
-			<li class="page-item" :class="{ disabled: page == totalPages }">
+							<a class="page-link" href="#" @click.prevent="nextPage">Suivant</a>
+							</li>
+			<li class="page-item" v-if="page != totalPages">
 				<a class="page-link" href="#" @click.prevent="changePage(totalPages)">{{ totalPages }}</a>
 			</li>
-		</ul>
+					</ul>
 	</nav>
 </template>
 
 <script>
-//depends de bootstrap 4
 export default {
 	props: {
 		totalPages: {
 			type: Number,
 			required: true,
-		},
-		displayCount: {
-			type: Number,
-			default: 7,
 		},
 	},
 	data() {
@@ -45,8 +40,6 @@ export default {
 		return {
 			page,
 		}
-	},
-	computed: {
 	},
 	methods: {
 		changePage(page) {
@@ -77,7 +70,6 @@ export default {
 			}
 			const urlParams = '?' + urlSearchParams.toString();
 			const url = `${window.location.pathname}${urlParams}`;
-			// naviguer vers l'URL GET
 			this.$router.replace(url);
 		},
 	},

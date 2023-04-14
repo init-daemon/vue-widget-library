@@ -1,4 +1,6 @@
 {
+  "name": "vue-widgets-lib",
+  "version": "0.0.1",
   "dependencies": {
     "@types/vue": "^2.0.0",
     "bootstrap": "^4.6.0"
